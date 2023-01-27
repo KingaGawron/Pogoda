@@ -1,18 +1,18 @@
 let weather = {
   apiKey: "cb263a9ed6988851a2ee09f0fe224e91",
   weatherArray:[],
-  
+
   fetchWeather: function (city) {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric&appid=" +
-        this.apiKey
+      city +
+      "&units=metric&appid=" +
+      this.apiKey
     )
       .then((response) => response.json())
-      .then((data) => this.displayWeather(data));
+  .then((data) => this.displayWeather(data));
   },
-  
+
   displayWeather: function (data) {
     const { name } = data;
     const { icon, description } = data.weather[0];
@@ -28,16 +28,12 @@ let weather = {
     </div>
     <p class="humidity">Humidity: ${humidity}% </p>
   </div> `;
-  document.querySelector("#weathers").insertAdjacentHTML('afterbegin', divTag);
-
   if(this.weatherArray.length>9){
     const deleted = this.weatherArray.shift();
     document.querySelector("#"+deleted).remove();
 
   }
-    //document.querySelector("#weathers").innerHTML+=divTag
-    document.querySelector("#weathers").innerHTML
-
+    document.querySelector("#weathers").innerHTML+=divTag
     this.weatherArray.push(name.toLowerCase());
 
     localStorage.setItem("weathers", JSON.stringify(this.weatherArray));
@@ -63,7 +59,6 @@ document
     if (event.key == "Enter") weather.search();
   });
   const zmienna = JSON.parse(localStorage.getItem("weathers") || "[]")
-zmienna.forEach(element => {
-    weatherArray.push(element);
+  zmienna.forEach(element => {
     weather.fetchWeather(element);
   });

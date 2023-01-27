@@ -31,15 +31,13 @@ let weather = {
   if(this.weatherArray.length>9){
     const deleted = this.weatherArray.shift();
     document.querySelector("#"+deleted).remove();
-    
+
   }
     document.querySelector("#weathers").innerHTML+=divTag
-   // document.querySelector("#weathers").innerHTML = divTag + document.querySelector("#weathers").innerHTML
-
     this.weatherArray.push(name.toLowerCase());
 
     localStorage.setItem("weathers", JSON.stringify(this.weatherArray));
-   
+
 
   },
   search: function () {

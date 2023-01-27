@@ -28,12 +28,16 @@ let weather = {
     </div>
     <p class="humidity">Humidity: ${humidity}% </p>
   </div> `;
+  document.querySelector("#weathers").insertAdjacentHTML('afterbegin', divTag);
+
   if(this.weatherArray.length>9){
     const deleted = this.weatherArray.shift();
     document.querySelector("#"+deleted).remove();
 
   }
-    document.querySelector("#weathers").innerHTML+=divTag
+    //document.querySelector("#weathers").innerHTML+=divTag
+    document.querySelector("#weathers").innerHTML
+
     this.weatherArray.push(name.toLowerCase());
 
     localStorage.setItem("weathers", JSON.stringify(this.weatherArray));

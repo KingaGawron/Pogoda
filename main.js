@@ -42,7 +42,7 @@ let weather = {
   },
   search: function () {
     const searchBar=document.querySelector(".search-bar").value;
-    if (this.weatherArray.includes(searchBar)) {
+    if (this.weatherArray.includes(searchBar.toLowerCase())) {
       alert("To miasto już było")
 
     } else {
@@ -59,6 +59,7 @@ document
     if (event.key == "Enter") weather.search();
   });
   const zmienna = JSON.parse(localStorage.getItem("weathers") || "[]")
-  zmienna.forEach(element => {
+zmienna.forEach(element => {
+    weatherArray.push(element);
     weather.fetchWeather(element);
   });

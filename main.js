@@ -13,11 +13,10 @@
       return
     }
     
-  
     const { icon, description } = data.weather[0]
     const { temp, humidity } = data.main
     const weatherDiv = ` <div id="${name.toLowerCase()}" class="weather loading">
-      <h1 class="city">Weather in ${name}</h1>
+      <h1 class="city">Weather in ${name}<button onclick="deleteWeather('${name.toLowerCase()}')">Delete</button></h1>
       <h2 class="temp">${temp} °C </h2>
       <div class="flex">
         <img src="http://openweathermap.org/img/wn/${icon}.png" alt="" class="icon" />
@@ -38,7 +37,7 @@
   
     localStorage.setItem('weathers', JSON.stringify(weatherArray))
   }
-  
+
   const downloadWeatherFromApi = city => {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=' + apiKey)
       .then(response => response.json())
@@ -62,3 +61,12 @@
   weathersSaved.forEach(element => {
     downloadWeatherFromApi(element)
   })
+
+  function deleteWeather(city) {
+    const deleted = weatherArray.indexOf(city)
+    weatherArray.splice(deleted, 1)
+    document.querySelector('#' + city).remove()
+    localStorage.setItem('weathers', JSON.stringify(weatherArray))
+  }
+  
+  
